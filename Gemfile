@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.3.1'
 
 gem 'rails', '~> 5.2.3'
+
+gem 'attr_extras', require: 'attr_extras/explicit'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'grape'
 gem 'hashie-forbidden_attributes'
