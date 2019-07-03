@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.1'
+ruby '2.5.3'
 
 gem 'rails', '~> 5.2.3'
 
@@ -10,11 +10,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'grape'
 gem 'hashie-forbidden_attributes'
 gem 'jbuilder', '~> 2.5'
-gem 'pg', '>= 0.18', '< 2.0'
+# gem 'pg', '~> 1.1.4'
 gem 'pry', '~> 0.12.2'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
+gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
