@@ -4,7 +4,7 @@ y | ./libra_source/scripts/dev_setup.sh
 
 # Start the first process - regular bash script, use folders from dockerfile
 cd libra_source
-./scripts/cli/start_cli_testnet.sh
+./scripts/cli/start_cli_testnet.sh &
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start my_first_process: $status"
