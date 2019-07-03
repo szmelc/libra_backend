@@ -1,10 +1,15 @@
 #!/bin/bash
-git clone https://github.com/libra/libra.git libra_source
-y | ./libra_source/scripts/dev_setup.sh
-
 # Start the first process - regular bash script, use folders from dockerfile
+git clone https://github.com/libra/libra.git libra_source
+
+chmod +x ./libra_source/scripts/dev_setup.sh
+
+echo "y" | ./libra_source/scripts/dev_setup.sh
+source $HOME/.cargo/env
+
 cd libra_source
-./scripts/cli/start_cli_testnet.sh &
+cargo build
+./scripts/cli/start_cli_testnet.sh </dev/null &>/dev/null &
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start my_first_process: $status"
@@ -13,7 +18,7 @@ fi
 
 # Start the second process - regular bash script, use folders from dockerfile
 cd ..
-./rails server -b 0.0.0.0
+rails server -b 0.0.0.0 </dev/null &>/dev/null &
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start my_second_process: $status"
