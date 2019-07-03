@@ -1,10 +1,10 @@
 #!/bin/bash
-echo $WORKDIR
-ls
-./libra_source/scripts/dev_setup.sh
+git clone https://github.com/libra/libra.git libra_source
+y | ./libra_source/scripts/dev_setup.sh
 
 # Start the first process - regular bash script, use folders from dockerfile
-./libra_source/scripts/cli/start_cli_testnet.sh
+cd libra_source
+./scripts/cli/start_cli_testnet.sh
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start my_first_process: $status"
@@ -12,7 +12,8 @@ if [ $status -ne 0 ]; then
 fi
 
 # Start the second process - regular bash script, use folders from dockerfile
-./myapp/rails server -b 0.0.0.0
+cd ..
+./rails server -b 0.0.0.0
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start my_second_process: $status"
