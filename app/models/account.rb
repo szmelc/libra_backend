@@ -1,0 +1,3 @@
+class Account
+  MAIN_WALLET_ID = "bd2021047a9a649e6556475f68c8ce6e15b9307718400c682c267c1466cd5774".freeze
+end
