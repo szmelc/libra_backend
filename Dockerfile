@@ -1,24 +1,21 @@
-FROM debian:latest
+FROM ruby:2.6.3-alpine3.9
 
-RUN apt-get update
-RUN apt-get install -y --force-yes build-essential bash curl git
-RUN apt-get install -y openssl
-RUN apt-get install -y --force-yes gnupg2 zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev
-RUN apt-get install -y procps
+RUN apk add bash
+RUN apk add -y procps bash curl openssl libxml2-dev libxslt-dev build-base libxml2-dev libxslt-dev postgresql-dev
 
-RUN gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
-RUN curl -sSL https://get.rvm.io | bash -s
-RUN /bin/bash -l -c ". /etc/profile.d/rvm.sh && rvm install 2.6.3"
-
-RUN /bin/bash -l -c "gem install bundler"
-RUN export PATH=$PATH:/var/lib/gems/1.8/bin
+SHELL [ "/bin/bash", "-l", "-c" ]
 
 RUN mkdir /myapp
 COPY . /myapp
 
 COPY Gemfile* /tmp/
 WORKDIR /tmp
-RUN /bin/bash -l -c "bundle install"
+RUN bundle config build.nokogiri --use-system-libraries
+RUN bundle install
+RUN gem install libv8
+RUN bundle config build.therubyracer --use-system-libraries
+RUN gem install therubyracer
+RUN gem install uglifier
 
 WORKDIR /myapp
 
@@ -26,5 +23,7 @@ WORKDIR /myapp
 EXPOSE 3000
 
 # Start the main process.
-RUN ["chmod", "+x", "wrapper_script.sh"]
-CMD ./wrapper_script.sh
+# RUN ["chmod", "+x", "wrapper_script.sh"]
+# CMD ./wrapper_script.sh
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
