@@ -8,6 +8,8 @@ gem 'rails', '~> 5.2.3'
 gem 'attr_extras', require: 'attr_extras/explicit'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'grape'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
 gem 'hashie-forbidden_attributes'
 gem 'jbuilder', '~> 2.5'
 # gem 'pg', '~> 1.1.4'
