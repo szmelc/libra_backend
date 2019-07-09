@@ -9,12 +9,10 @@ module LibraServices
     def create_libra_account
       # `echo "account create" | docker attach test_libra2`
       # command = "docker container run -i lszmelc/libra << EOF \n account create \n EOF"
-      binding.pry
-      command = "echo 'account create' | docker attach test_libra2"
-      response = system(command)
-      wallet_id = response.match(/address \w+/).to_s.split(' ')[1]
-      write_command = "docker container run -i lszmelc/libra << EOF \n account write #{wallet_id} \n EOF"
-      write = `#{command}`
+      `echo 'account create' > libra.fifo`
+      sleep(1)
+      file_data = File.read("output.log").split
+      wallet_id = file_data.last
       if update_users_wallet_id
         success(data: wallet_id)
       end

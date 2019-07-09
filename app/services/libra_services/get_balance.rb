@@ -12,12 +12,11 @@ module LibraServices
     def get_balance
       return false if wallet_id.empty?
 
-      binding.pry
-      command = "docker container run -i lszmelc/libra << EOF \n query balance #{wallet_id} \n EOF"
-      response = `#{command}`
-      balance_string = response.match(/Balance is: \d+\.\d+/).to_s
-      balance = balance_string.match(/\d+\.\d+/).to_s.to_f
-      puts "Balance is #{balance}"
+      command = "echo 'query balance #{wallet_id}' > libra.fifo"
+      system(command)
+      sleep(0.5)
+      file_data = File.read("output.log").split
+      balance = file_data.last.to_f
       success(data: balance)
     end
   end
