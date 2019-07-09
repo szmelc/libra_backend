@@ -1,7 +1,9 @@
 class API < Grape::API
   default_format :json
   helpers DockerHelpers
-  prefix 'api' # use prefix in api path
+  prefix 'api'
 
-  mount V1::Base # mount version 1
+  mount V1::Base
+  add_swagger_documentation \
+  mount_path: '/docs'
 end

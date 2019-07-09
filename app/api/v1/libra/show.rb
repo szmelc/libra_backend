@@ -6,7 +6,6 @@ module V1
         requires :wallet_id, type: String, desc: "User's wallet ID"
       end
       get do
-        # return unless container_running?("test_libra2")
         data = declared(params)
         if data[:wallet_id].present?
           result = LibraServices::GetBalance.call(wallet_id: data[:wallet_id])
