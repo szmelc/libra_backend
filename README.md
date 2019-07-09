@@ -1,24 +1,15 @@
-# README
+# Data Annotation Platform Libra Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application transfers requests from Data Annotation Platform application to libra-cli.
 
-Things you may want to cover:
+### Technology stack
 
-* Ruby version
+* Ruby [version](.ruby-version)
+* Rails [version](Gemfile)
 
-* System dependencies
+## Prerequisites
 
-* Configuration
+You will need the following things properly installed on your computer:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+For rails app:
+ * ruby (via rvm, use proper [version](.ruby-version)) - https://rvm.io/ `rvm install ruby-2.5.3` `rvm use 2.5.3  --default`
